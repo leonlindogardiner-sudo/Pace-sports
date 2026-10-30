@@ -1,12 +1,791 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Startup</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PACE Sports | Every Sport. Every Story.</title>
+<style>
+:root {
+  --navy: #071426;
+  --blue: #087cff;
+  --light: #eef3f9;
+  --white: #ffffff;
+  --muted: #9eacc0;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--light);
+  color: #111c2c;
+}
+header {
+  background: var(--navy);
+  color: white;
+  border-bottom: 4px solid var(--blue);
+}
+.topbar {
+  max-width: 1200px;
+  margin: auto;
+  padding: 23px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.logo {
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+}
+.logo span { color: #1684ff; }
+.logo-img {
+  display: block;
+  width: 205px;
+  max-width: 100%;
+  height: auto;
+}
+.tagline {
+  color: #b8c7da;
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-top: 5px;
+}
+nav {
+  background: #10233b;
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 5px;
+  padding: 0 12px;
+}
+nav button {
+  background: transparent;
+  border: 0;
+  color: white;
+  padding: 16px 19px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 13px;
+}
+nav button:hover, nav button.active {
+  background: var(--blue);
+}
+.search-form {
+  display: flex;
+  width: min(390px, 100%);
+  border: 1px solid #49617e;
+  background: #10233b;
+}
+.search-form input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  background: transparent;
+  color: white;
+  padding: 12px 14px;
+  font: inherit;
+}
+.search-form input::placeholder { color: #b8c7da; }
+.search-form input:focus { outline: 2px solid var(--blue); outline-offset: -2px; }
+.search-form button {
+  border: 0;
+  background: var(--blue);
+  color: white;
+  font-weight: 800;
+  padding: 0 15px;
+  cursor: pointer;
+}
+.search-form button:hover { background: #0067dc; }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.breaking {
+  background: var(--blue);
+  color: white;
+  padding: 11px 20px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: .5px;
+}
+.breaking span {
+  background: white;
+  color: var(--blue);
+  padding: 4px 8px;
+  margin-right: 10px;
+}
+.container {
+  max-width: 1200px;
+  margin: 28px auto;
+  padding: 0 20px;
+}
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 32px 0 18px;
+  font-size: 21px;
+  font-weight: 900;
+}
+.section-heading:before {
+  content: "";
+  width: 5px;
+  height: 25px;
+  background: var(--blue);
+}
+.hero {
+  display: grid;
+  grid-template-columns: 1.65fr 1fr;
+  gap: 18px;
+}
+.hero-main {
+  min-height: 350px;
+  background: linear-gradient(90deg, rgba(3,13,28,.96), rgba(3,13,28,.35)),
+  url("https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1200&q=85") center/cover;
+  color: white;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  border-radius: 5px;
+}
+.hero-main h1 {
+  font-size: clamp(28px, 4vw, 43px);
+  line-height: 1.08;
+  margin: 12px 0;
+  max-width: 650px;
+}
+.hero-side {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 18px;
+}
+.side-story {
+  min-height: 160px;
+  background: #142943;
+  color: white;
+  padding: 22px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+.side-story h2 {
+  font-size: 21px;
+  margin: 10px 0 0;
+}
+.category {
+  display: inline-block;
+  background: var(--blue);
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 6px 9px;
+  width: fit-content;
+}
+.meta {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 12px;
+}
+.hero .meta { color: #d0dbea; }
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 18px 0;
+}
+.filters button {
+  border: 1px solid #d3dce8;
+  background: white;
+  padding: 10px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.filters button.active, .filters button:hover {
+  background: var(--navy);
+  color: white;
+}
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.story {
+  background: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(10,30,60,.06);
+}
+.story-image {
+  height: 175px;
+  background: #142943;
+  overflow: hidden;
+}
+
+.story-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.image-credit {
+  padding: 5px 16px 0;
+  color: #63748a;
+  font-size: 11px;
+}
+.image-credit a { color: inherit; }
+.image-credit a:hover { color: var(--blue); }
+.story-content { padding: 19px; }
+.story h3 {
+  font-size: 19px;
+  line-height: 1.3;
+  margin: 12px 0;
+}
+.story p {
+  color: #66758a;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.read {
+  color: var(--blue);
+  font-weight: bold;
+  font-size: 12px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px 0;
+}
+.read:hover { text-decoration: underline; }
+.article-source {
+  display: inline-block;
+  margin: 8px 0 20px;
+  color: var(--blue);
+  font-weight: 800;
+}
+.breaking-panel {
+  display: grid;
+  grid-template-columns: minmax(150px, .7fr) 2fr;
+  align-items: center;
+  gap: 20px;
+  margin: 24px 0 34px;
+  padding: 17px 20px;
+  background: #fff;
+  border-left: 5px solid var(--blue);
+}
+.breaking-panel strong {
+  color: var(--blue);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.breaking-panel p { margin: 0; font-weight: 700; }
+.page-view { display: none; }
+.page-view.is-active { display: block; }
+.schedule-view {
+  max-width: 1200px;
+  margin: 28px auto;
+  padding: 0 20px;
+}
+.schedule-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 28px 0 18px;
+}
+.schedule-head h1 { margin: 0; font-size: clamp(28px, 4vw, 40px); }
+.demo-note {
+  margin: 0 0 22px;
+  padding: 12px 15px;
+  background: #e6f1ff;
+  border-left: 4px solid var(--blue);
+  color: #1b385c;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.schedule-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
+.schedule-filters button {
+  border: 1px solid #ccd7e5;
+  background: white;
+  color: #142943;
+  padding: 9px 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.schedule-filters button.active,
+.schedule-filters button:hover { background: var(--navy); color: white; }
+.schedule-list { display: grid; gap: 10px; }
+.schedule-row {
+  display: grid;
+  grid-template-columns: 150px minmax(110px, .8fr) 1.8fr minmax(110px, .8fr);
+  align-items: center;
+  gap: 16px;
+  padding: 17px 18px;
+  background: white;
+  border-bottom: 1px solid #dce4ee;
+}
+.schedule-row.hidden { display: none; }
+.schedule-date, .schedule-sport { color: #63748a; font-size: 12px; font-weight: 700; }
+.schedule-sport { color: var(--blue); text-transform: uppercase; letter-spacing: .5px; }
+.schedule-event { font-weight: 800; }
+.schedule-status { justify-self: end; color: #63748a; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+.score { font-size: 20px; font-weight: 900; }
+.empty-state { display: none; padding: 24px; color: #63748a; background: white; }
+.empty-state.is-visible { display: block; }
+.article-view {
+  display: none;
+  background: white;
+  padding: 30px;
+  max-width: 850px;
+  margin: 25px auto;
+  border-radius: 5px;
+}
+.article-view h1 {
+  font-size: clamp(28px, 5vw, 42px);
+  line-height: 1.15;
+}
+.article-view p {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #38475b;
+}
+.back {
+  background: var(--navy);
+  color: white;
+  padding: 12px 18px;
+  border: 0;
+  cursor: pointer;
+  font-weight: bold;
+}
+footer {
+  margin-top: 55px;
+  background: var(--navy);
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+}
+footer .logo { margin-bottom: 8px; }
+footer p { color: #aebdd0; font-size: 12px; }
+.hidden { display: none !important; }
+@media(max-width: 750px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-side { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .news-grid { grid-template-columns: repeat(2, 1fr); }
+  .topbar { flex-direction: column; align-items: stretch; }
+  .search-form { width: 100%; }
+  .breaking-panel { grid-template-columns: 1fr; gap: 7px; }
+  .schedule-row { grid-template-columns: 110px 1fr; gap: 8px 14px; }
+  .schedule-status { justify-self: start; }
+}
+@media(max-width: 500px) {
+  .news-grid { grid-template-columns: 1fr; }
+  .hero-side { grid-template-columns: 1fr; }
+  .hero-main { min-height: 300px; }
+  nav button { padding: 13px 10px; }
+  .container { padding: 0 13px; }
+  .schedule-view { padding: 0 13px; }
+  .schedule-head { align-items: start; flex-direction: column; }
+  .schedule-row { grid-template-columns: 1fr auto; padding: 14px; }
+  .schedule-event { grid-column: 1 / -1; }
+  .schedule-status { grid-column: 1 / -1; }
+}
+</style>
 </head>
 <body>
-    <h1>Something New Starts Here.</h1>
-    <p>Our next big idea is being built.</p>
+
+<header>
+  <div class="topbar">
+    <div>
+      <div class="logo">
+        <img src="images/pace-logo.png.png" alt="PACE Sports" class="logo-img">
+      </div>
+    <div class="tagline">EVERY SPORT. EVERY STORY.</div>
+    </div>
+    <form class="search-form" id="searchForm" role="search">
+      <label class="sr-only" for="searchInput">Search news articles</label>
+      <input id="searchInput" type="search" placeholder="Search news articles" autocomplete="off">
+      <button type="submit">SEARCH</button>
+    </form>
+  </div>
+  <nav>
+    <button class="active" data-category="all" onclick="showHome('all',this)">HOME</button>
+    <button data-category="football" onclick="showHome('football',this)">FOOTBALL</button>
+    <button data-category="formula1" onclick="showHome('formula1',this)">FORMULA 1</button>
+    <button data-category="btcc" onclick="showHome('btcc',this)">BTCC</button>
+    <button data-category="all" onclick="showHome('all',this)">LATEST NEWS</button>
+    <button onclick="showSchedule('fixtures',this)">FIXTURES</button>
+    <button onclick="showSchedule('results',this)">RESULTS</button>
+  </nav>
+  <div class="breaking"><span>PACE NEWS</span> FOOTBALL • FORMULA 1 • BRITISH TOURING CARS</div>
+</header>
+
+<main class="container page-view is-active" id="home">
+  <div class="section-heading">TOP STORIES</div>
+
+  <section class="hero">
+    <div class="hero-main">
+      <span class="category">CARABAO CUP</span>
+      <h1>Fleetwood stun Arsenal to reach historic Cup quarter-final</h1>
+      <div class="meta">CUP HIGHLIGHT • 28 OCT 2026</div>
+    </div>
+    <div class="hero-side">
+      <div class="side-story">
+        <span class="category">FORMULA 1</span>
+        <h2>Inside the world of Formula 1</h2>
+        <div class="meta">PACE MOTORSPORT</div>
+      </div>
+      <div class="side-story">
+        <span class="category">BTCC</span>
+        <h2>Every lap. Every battle. Every story.</h2>
+        <div class="meta">PACE RACING</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="breaking-panel" aria-label="Breaking news desk">
+    <strong>THIS WEEK IN THE CUP</strong>
+    <p>Fleetwood's giant-killing, penalty drama for the holders and Everton's derby win headline the quarter-final line-up. <span class="meta">EFL reports • 27–29 Oct</span></p>
+  </section>
+
+  <div class="section-heading">LATEST NEWS &amp; HIGHLIGHTS</div>
+  <div class="filters">
+    <button class="active" data-category="all" onclick="showHome('all',this)">ALL NEWS</button>
+    <button data-category="football" onclick="showHome('football',this)">FOOTBALL</button>
+    <button data-category="formula1" onclick="showHome('formula1',this)">FORMULA 1</button>
+    <button data-category="btcc" onclick="showHome('btcc',this)">BTCC</button>
+  </div>
+
+  <section class="news-grid" id="newsGrid">
+    <article class="story" data-category="football">
+     <div class="story-image">
+  <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=800" alt="Football stadium">
+</div>
+      <div class="story-content">
+          <span class="category">CARABAO CUP</span>
+        <h3>Fleetwood stun Arsenal in Carabao Cup shootout</h3>
+        <p>Aaron Loupalo-Bi put Fleetwood ahead before Viktor Gyokeres levelled. Jay Lynch saved in the shootout as the hosts made history.</p>
+        <div class="meta">CARABAO CUP • 27 OCT 2026</div>
+        <button class="read" onclick="openArticle(0)">READ FULL STORY →</button>
+        <a class="read" href="https://www.efl.com/news/2026/october/28/carabao-cup--fleetwood-town-shock-arsenal-in-shootout-win/" target="_blank" rel="noopener noreferrer">EFL MATCH REPORT ↗</a>
+      </div>
+    </article>
+
+    <article class="story" data-category="formula1">
+    <div class="story-image">
+  <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?w=800" alt="Motorsport racing car">
+</div>
+      <div class="story-content">
+        <span class="category">FORMULA 1</span>
+        <h3>Austin to Mexico: Antonelli carries a win into the next GP</h3>
+        <p>Andrea Kimi Antonelli won in Austin ahead of Charles Leclerc and Max Verstappen. The paddock now heads straight to Mexico City, 30 Oct–1 Nov.</p>
+        <div class="meta">FORMULA 1 • 30 OCT 2026</div>
+        <button class="read" onclick="openArticle(1)">READ FULL STORY →</button>
+        <a class="read" href="https://www.formula1.com/en/latest/article/antonelli-surges-to-dominant-victory-in-united-states-grand-prix-ahead-of-leclerc-and-verstappen.6kmBQv9FNTW7LzkDj8S34j" target="_blank" rel="noopener noreferrer">F1 RACE REPORT ↗</a>
+      </div>
+    </article>
+
+    <article class="story" data-category="football">
+      <div class="story-image">🏆</div>
+      <div class="story-content">
+        <span class="category">CARABAO CUP</span>
+        <h3>Man City edge Brighton on penalties as Cup drama continues</h3>
+        <p>City came from behind twice to draw 2–2, then advanced 4–3 on penalties after goalkeeper Geronimo Rulli made two saves.</p>
+        <div class="meta">CARABAO CUP • 28 OCT 2026</div>
+        <button class="read" onclick="openArticle(2)">READ FULL STORY →</button>
+        <a class="read" href="https://www.efl.com/news/2026/october/28/carabao-cup--holders-taken-to-penalties-as-quarter-final-ties-take-shape/" target="_blank" rel="noopener noreferrer">EFL MATCH REPORT ↗</a>
+      </div>
+    </article>
+
+    <article class="story" data-category="btcc">
+      <div class="story-image">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Aiden_Moffat_Ash_Sutton_BTCC_Race_3_Silverstone_2026.jpg/960px-Aiden_Moffat_Ash_Sutton_BTCC_Race_3_Silverstone_2026.jpg" alt="Ash Sutton racing his NAPA Ford Focus at Silverstone">
+      </div>
+      <div class="image-credit"><a href="https://commons.wikimedia.org/wiki/File:Aiden_Moffat_Ash_Sutton_BTCC_Race_3_Silverstone_2026.jpg" target="_blank" rel="noopener noreferrer">Photo: BWard 1997 / Wikimedia Commons, CC BY 4.0</a></div>
+      <div class="story-content">
+        <span class="category">BTCC</span>
+        <h3>Ash Sutton crowned 2026 BTCC champion for the fifth time</h3>
+        <p>The season is complete. Sutton topped the final standings on 516 points for NAPA Racing UK in his Ford Focus Titanium.</p>
+        <div class="meta">BTCC • 2026 CHAMPIONSHIP</div>
+        <button class="read" onclick="openArticle(3)">READ FULL STORY →</button>
+        <a class="read" href="https://btcc.net/driver/ashley-sutton/" target="_blank" rel="noopener noreferrer">BTCC DRIVER PROFILE ↗</a>
+      </div>
+    </article>
+
+    <article class="story" data-category="football">
+      <div class="story-image">🥅</div>
+      <div class="story-content">
+        <span class="category">CARABAO CUP</span>
+        <h3>Everton knock Newcastle out with 3–1 Cup win</h3>
+        <p>James Garner, Hayden Hackney and Thierno Barry scored as Everton booked a quarter-final trip to Fleetwood.</p>
+        <div class="meta">CARABAO CUP • 29 OCT 2026</div>
+        <button class="read" onclick="openArticle(4)">READ FULL STORY →</button>
+        <a class="read" href="https://www.efl.com/news/2026/october/29/carabao-cup--everton-cruise-past-newcastle-to-book-quarter-final-place/" target="_blank" rel="noopener noreferrer">EFL MATCH REPORT ↗</a>
+      </div>
+    </article>
+
+    <article class="story" data-category="formula1">
+      <div class="story-image">🏆</div>
+      <div class="story-content">
+        <span class="category">MOTORSPORT</span>
+        <h3>What makes a great racing circuit?</h3>
+        <p>Fast corners, overtaking opportunities and challenging layouts all matter.</p>
+        <div class="meta">PACE MOTORSPORT • SAMPLE FEATURE</div>
+        <button class="read" onclick="openArticle(5)">READ FULL STORY →</button>
+      </div>
+    </article>
+  </section>
+</main>
+
+  <div class="empty-state" id="newsEmpty" role="status">No stories match that search. Try another term or sport.</div>
+
+<section class="schedule-view page-view" id="fixtures">
+  <div class="schedule-head">
+    <div><span class="category">MATCH CENTRE</span><h1>Fixtures &amp; Calendars</h1></div>
+  </div>
+  <p class="demo-note"><strong>Weekend schedule, updated 30 Oct 2026:</strong> Football kick-off times are GMT. Formula 1 sessions are shown in the published weekend schedule. BTCC returns in April 2027.</p>
+  <div class="section-heading">UPCOMING FIXTURES &amp; RACE CALENDAR</div>
+  <div class="schedule-filters" aria-label="Filter fixtures by sport">
+    <button class="active" onclick="filterSchedule('fixtures','all',this)">ALL SPORTS</button>
+    <button onclick="filterSchedule('fixtures','football',this)">FOOTBALL</button>
+    <button onclick="filterSchedule('fixtures','formula1',this)">FORMULA 1</button>
+    <button onclick="filterSchedule('fixtures','btcc',this)">BTCC</button>
+  </div>
+  <div class="schedule-list" id="fixtureList">
+    <div class="schedule-row" data-sport="football"><span class="schedule-date">Sat 31 Oct</span><span class="schedule-sport">Football</span><span class="schedule-event">Chelsea vs Manchester United</span><span class="schedule-status">12:30 GMT</span></div>
+    <div class="schedule-row" data-sport="football"><span class="schedule-date">Sat 31 Oct</span><span class="schedule-sport">Football</span><span class="schedule-event">Bournemouth vs Leeds United</span><span class="schedule-status">15:00 GMT</span></div>
+    <div class="schedule-row" data-sport="football"><span class="schedule-date">Sat 31 Oct</span><span class="schedule-sport">Football</span><span class="schedule-event">Brentford vs Nottingham Forest</span><span class="schedule-status">15:00 GMT</span></div>
+    <div class="schedule-row" data-sport="football"><span class="schedule-date">Sat 31 Oct</span><span class="schedule-sport">Football</span><span class="schedule-event">Coventry City vs Sunderland</span><span class="schedule-status">15:00 GMT</span></div>
+    <div class="schedule-row" data-sport="football"><span class="schedule-date">Sat 31 Oct</span><span class="schedule-sport">Football</span><span class="schedule-event">Hull City vs Ipswich Town</span><span class="schedule-status">15:00 GMT</span></div>
+    <div class="schedule-row" data-sport="football"><span class="schedule-date">Sat 31 Oct</span><span class="schedule-sport">Football</span><span class="schedule-event">Manchester City vs Brighton</span><span class="schedule-status">15:00 GMT</span></div>
+    <div class="schedule-row" data-sport="football"><span class="schedule-date">Sat 31 Oct</span><span class="schedule-sport">Football</span><span class="schedule-event">Tottenham Hotspur vs Crystal Palace</span><span class="schedule-status">17:30 GMT</span></div>
+    <div class="schedule-row" data-sport="football"><span class="schedule-date">Sat 31 Oct</span><span class="schedule-sport">Football</span><span class="schedule-event">Aston Villa vs Fulham</span><span class="schedule-status">20:00 GMT</span></div>
+    <div class="schedule-row" data-sport="football"><span class="schedule-date">Sun 1 Nov</span><span class="schedule-sport">Football</span><span class="schedule-event">Liverpool vs Arsenal</span><span class="schedule-status">16:30 GMT</span></div>
+    <div class="schedule-row" data-sport="football"><span class="schedule-date">Mon 2 Nov</span><span class="schedule-sport">Football</span><span class="schedule-event">Newcastle United vs Everton</span><span class="schedule-status">20:00 GMT</span></div>
+    <div class="schedule-row" data-sport="formula1"><span class="schedule-date">Fri 30 Oct</span><span class="schedule-sport">Formula 1</span><span class="schedule-event">Mexico City Grand Prix · Practice 1</span><span class="schedule-status">18:30</span></div>
+    <div class="schedule-row" data-sport="formula1"><span class="schedule-date">Fri 30 Oct</span><span class="schedule-sport">Formula 1</span><span class="schedule-event">Mexico City Grand Prix · Practice 2</span><span class="schedule-status">22:00</span></div>
+    <div class="schedule-row" data-sport="formula1"><span class="schedule-date">Sat 31 Oct</span><span class="schedule-sport">Formula 1</span><span class="schedule-event">Mexico City Grand Prix · Practice 3</span><span class="schedule-status">17:30</span></div>
+    <div class="schedule-row" data-sport="formula1"><span class="schedule-date">Sat 31 Oct</span><span class="schedule-sport">Formula 1</span><span class="schedule-event">Mexico City Grand Prix · Qualifying</span><span class="schedule-status">21:00</span></div>
+    <div class="schedule-row" data-sport="formula1"><span class="schedule-date">Sun 1 Nov</span><span class="schedule-sport">Formula 1</span><span class="schedule-event">Mexico City Grand Prix · Race</span><span class="schedule-status">20:00</span></div>
+  </div>
+  <div class="empty-state schedule-empty" id="fixtureEmpty" role="status">No BTCC rounds are scheduled before April 2027.</div>
+</section>
+
+<section class="schedule-view page-view" id="results">
+  <div class="schedule-head">
+    <div><span class="category">MATCH CENTRE</span><h1>Carabao Cup Results</h1></div>
+  </div>
+  <p class="demo-note"><strong>Fourth-round highlights · 27–29 Oct 2026:</strong> Football cup results only. Shootout winners are noted; no F1 results are included. Results are taken from EFL match reports.</p>
+  <div class="schedule-list" id="resultList">
+    <div class="schedule-row"><span class="schedule-date">Tue 27 Oct</span><span class="schedule-sport">Carabao Cup</span><span class="schedule-event">Fleetwood Town <span class="score">1–1</span> Arsenal</span><span class="schedule-status">Fleetwood win on penalties</span></div>
+    <div class="schedule-row"><span class="schedule-date">Wed 28 Oct</span><span class="schedule-sport">Carabao Cup</span><span class="schedule-event">Manchester City <span class="score">2–2</span> Brighton</span><span class="schedule-status">Man City win 4–3 on penalties</span></div>
+    <div class="schedule-row"><span class="schedule-date">Wed 28 Oct</span><span class="schedule-sport">Carabao Cup</span><span class="schedule-event">Bournemouth <span class="score">3–0</span> Aston Villa</span><span class="schedule-status">Full time</span></div>
+    <div class="schedule-row"><span class="schedule-date">Wed 28 Oct</span><span class="schedule-sport">Carabao Cup</span><span class="schedule-event">Crystal Palace <span class="score">1–0</span> Fulham</span><span class="schedule-status">Full time</span></div>
+    <div class="schedule-row"><span class="schedule-date">Wed 28 Oct</span><span class="schedule-sport">Carabao Cup</span><span class="schedule-event">Sunderland <span class="score">3–2</span> Brentford</span><span class="schedule-status">Full time</span></div>
+    <div class="schedule-row"><span class="schedule-date">Wed 28 Oct</span><span class="schedule-sport">Carabao Cup</span><span class="schedule-event">Liverpool <span class="score">1–1</span> Chelsea</span><span class="schedule-status">Liverpool win on penalties</span></div>
+    <div class="schedule-row"><span class="schedule-date">Thu 29 Oct</span><span class="schedule-sport">Carabao Cup</span><span class="schedule-event">Everton <span class="score">3–1</span> Newcastle United</span><span class="schedule-status">Full time</span></div>
+  </div>
+</section>
+
+<section class="article-view page-view" id="article">
+  <button class="back" onclick="closeArticle()">← BACK TO PACE SPORTS</button>
+  <div style="margin-top:25px"><span class="category" id="articleCategory"></span></div>
+  <h1 id="articleTitle"></h1>
+  <div class="meta">PACE SPORTS • MATCH REPORT &amp; FEATURES</div>
+  <hr style="border:0;border-top:1px solid #e2e8f0;margin:24px 0">
+  <div id="articleBody"></div>
+  <button class="back" onclick="closeArticle()">← BACK TO ALL STORIES</button>
+</section>
+
+<footer>
+  <div class="logo">PACE<span style="color:#1684ff"> SPORTS</span></div>
+  <div class="tagline">EVERY SPORT. EVERY STORY.</div>
+  <p>Independent sports publication concept covering football and motorsport.</p>
+  <p>© 2026 PACE Sports. All rights reserved.</p>
+</footer>
+
+<script>
+const articles = [
+{
+category:"FOOTBALL",
+title:"Fleetwood stun Arsenal in Carabao Cup shootout",
+body:[
+"Fleetwood Town made the Carabao Cup quarter-finals for the first time after taking Arsenal to penalties at Highbury Stadium.",
+"Aaron Loupalo-Bi gave the hosts an early lead, and Viktor Gyokeres equalised after half-time. Arsenal were reduced to ten players late on.",
+"Goalkeeper Jay Lynch saved Bruno Guimaraes' spot-kick before Conor Haughey converted the decisive penalty."
+],
+sourceUrl:"https://www.efl.com/news/2026/october/28/carabao-cup--fleetwood-town-shock-arsenal-in-shootout-win/"},
+{
+category:"FORMULA 1",
+title:"Austin to Mexico: Antonelli carries a win into the next GP",
+body:[
+"Andrea Kimi Antonelli won the United States Grand Prix in Austin on 25 October, ahead of Charles Leclerc and Max Verstappen.",
+"The F1 paddock moves straight on to Mexico City for a back-to-back race weekend, running 30 October to 1 November.",
+"Mexico brings a different circuit and a new weekend of practice, qualifying and racing."
+],
+sourceUrl:"https://www.formula1.com/en/latest/article/antonelli-surges-to-dominant-victory-in-united-states-grand-prix-ahead-of-leclerc-and-verstappen.6kmBQv9FNTW7LzkDj8S34j",
+sourceText:"READ THE OFFICIAL F1 RACE REPORT ↗"},
+{
+category:"CARABAO CUP",
+title:"Man City edge Brighton on penalties as Cup drama continues",
+body:[
+"Manchester City advanced after a 2–2 draw with Brighton in a tie that swung back and forth at the Etihad.",
+"Brighton led twice, with Mateo Kovacic and a Rayan Cherki free-kick helping City respond. Geronimo Rulli made two saves in the shootout.",
+"City won the shootout 4–3 to keep their Carabao Cup defence alive."
+],
+sourceUrl:"https://www.efl.com/news/2026/october/28/carabao-cup--holders-taken-to-penalties-as-quarter-final-ties-take-shape/"},
+{
+category:"BTCC",
+title:"Ash Sutton crowned 2026 BTCC champion for the fifth time",
+body:[
+"The 2026 BTCC season is complete, with Ashley Sutton at the top of the final drivers' standings on 516 points.",
+"Sutton races for NAPA Racing UK in a Ford Focus Titanium. The championship is his fifth BTCC drivers' title.",
+"Tom Ingram finished second on 387 points."
+],
+sourceUrl:"https://btcc.net/driver/ashley-sutton/",
+sourceText:"VIEW THE OFFICIAL BTCC DRIVER PROFILE ↗"},
+{
+category:"CARABAO CUP",
+title:"Everton knock Newcastle out with 3–1 Cup win",
+body:[
+"Everton booked a place in the Carabao Cup quarter-finals with a 3–1 win over holders Newcastle.",
+"James Garner opened the scoring, Hayden Hackney added a second and Thierno Barry extended Everton's lead. Dan Burn scored a late consolation.",
+"Everton will travel to Fleetwood in the quarter-finals."
+],
+sourceUrl:"https://www.efl.com/news/2026/october/29/carabao-cup--everton-cruise-past-newcastle-to-book-quarter-final-place/"},
+{
+category:"FORMULA 1",
+title:"What makes a great racing circuit?",
+body:[
+"A great racing circuit needs a balance of speed, technical corners and opportunities for overtaking.",
+"Some circuits reward precision, while others challenge drivers with fast corners and changing conditions.",
+"The best tracks create exciting competition and memorable racing."
+]}
+];
+
+let activeCategory = "all";
+
+function setView(viewId) {
+  document.querySelectorAll(".page-view").forEach(view => {
+    view.classList.toggle("is-active", view.id === viewId);
+  });
+}
+
+function filterStories() {
+  const query = document.getElementById("searchInput").value.trim().toLowerCase();
+  const stories = Array.from(document.querySelectorAll(".story"));
+  let visibleCount = 0;
+
+  stories.forEach((story, index) => {
+    const categoryMatches = activeCategory === "all" || story.dataset.category === activeCategory;
+    const article = articles[index];
+    const searchableText = `${story.textContent} ${article.title} ${article.body.join(" ")}`.toLowerCase();
+    const searchMatches = !query || searchableText.includes(query);
+    const isVisible = categoryMatches && searchMatches;
+    story.classList.toggle("hidden", !isVisible);
+    if (isVisible) visibleCount += 1;
+  });
+
+  document.getElementById("newsEmpty").classList.toggle("is-visible", visibleCount === 0);
+}
+
+function showHome(category,button) {
+  activeCategory = category;
+  setView("home");
+  document.querySelectorAll(".filters button").forEach(item => {
+    item.classList.toggle("active", item.dataset.category === category);
+  });
+  document.querySelectorAll("nav button").forEach(item => item.classList.remove("active"));
+  if (button && button.closest("nav")) {
+    button.classList.add("active");
+  } else {
+    const navButton = Array.from(document.querySelectorAll("nav button[data-category]")).find(item => item.dataset.category === category);
+    if (navButton) navButton.classList.add("active");
+  }
+  filterStories();
+  window.scrollTo(0,0);
+}
+
+function showSchedule(viewId,button) {
+  setView(viewId);
+  document.querySelectorAll("nav button").forEach(item => item.classList.remove("active"));
+  if (button) button.classList.add("active");
+  window.scrollTo(0,0);
+}
+
+function filterSchedule(viewId,sport,button) {
+  const view = document.getElementById(viewId);
+  view.querySelectorAll(".schedule-filters button").forEach(item => item.classList.remove("active"));
+  button.classList.add("active");
+  const rows = Array.from(view.querySelectorAll(".schedule-row"));
+  let visibleCount = 0;
+  rows.forEach(row => {
+    const isVisible = sport === "all" || row.dataset.sport === sport;
+    row.classList.toggle("hidden", !isVisible);
+    if (isVisible) visibleCount += 1;
+  });
+  const emptyMessage = view.querySelector(".schedule-empty");
+  if (emptyMessage) emptyMessage.classList.toggle("is-visible", visibleCount === 0);
+}
+
+function openArticle(index) {
+  const article = articles[index];
+  if (!article) return;
+  setView("article");
+  document.getElementById("articleCategory").textContent = article.category;
+  document.getElementById("articleTitle").textContent = article.title;
+  const body = document.getElementById("articleBody");
+  body.replaceChildren(...article.body.map(text => {
+    const paragraph = document.createElement("p");
+    paragraph.textContent = text;
+    return paragraph;
+  }));
+  if (article.sourceUrl) {
+    const sourceLink = document.createElement("a");
+    sourceLink.className = "article-source";
+    sourceLink.href = article.sourceUrl;
+    sourceLink.target = "_blank";
+    sourceLink.rel = "noopener noreferrer";
+    sourceLink.textContent = article.sourceText || "READ THE OFFICIAL EFL REPORT ↗";
+    body.append(sourceLink);
+  }
+  window.scrollTo(0,0);
+}
+
+function closeArticle() {
+  showHome(activeCategory,null);
+}
+
+document.getElementById("searchForm").addEventListener("submit", event => {
+  event.preventDefault();
+  showHome("all",document.querySelector('nav button[data-category="all"]'));
+});
+
+document.getElementById("searchInput").addEventListener("input", () => {
+  if (document.getElementById("searchInput").value.trim() && !document.getElementById("home").classList.contains("is-active")) {
+    showHome("all",document.querySelector('nav button[data-category="all"]'));
+  } else if (document.getElementById("home").classList.contains("is-active")) {
+    filterStories();
+  }
+});
+
+document.getElementById("searchInput").addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    event.target.value = "";
+    filterStories();
+  }
+});
+</script>
 </body>
 </html>
